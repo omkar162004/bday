@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎀 Sneha's Magical Day 🎀</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+  min-height: 100vh;
+  overflow-x: hidden; /* prevents horizontal scroll but allows vertical */
+  overflow-y: auto;   /* allows vertical scroll */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #444;
+}
+
+
+    .gift-box {
+      width: 100px;
+      height: 100px;
+      background: #ffd1dc;
+      position: relative;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .lid {
+      width: 110px;
+      height: 20px;
+      background: #ffb3c6;
+      position: absolute;
+      top: -20px;
+      border-radius: 12px;
+    }
+
+    .gift-box.open .lid {
+      animation: openLid 0.5s ease forwards;
+    }
+
+    @keyframes openLid {
+      to { transform: translateY(-40px) rotate(-15deg); }
+    }
+
+    .message-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      margin-top: 25px;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+      width: 70%;
+      max-width: 320px;
+    }
+
+    .message-box h1 {
+      font-size: 2.3em;
+      color: #cc2b5e;
+    }
+
+    .hidden-message {
+      display: none;
+      color: #fff;
+      background: #ff5c8a;
+      padding: 18px;
+      border-radius: 15px;
+      margin-top: 20px;
+      font-size: 1.3em;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      margin-top: 18px;
+      background: linear-gradient(to right, #ff758f, #ffb199);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 16px rgba(255, 182, 193, 1);
+    }
+
+    .floating-elements {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .float {
+      position: absolute;
+      bottom: -60px;
+      animation: rise 10s infinite ease-in;
+      color: #ff66a3;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-elements" id="floatContainer"></div>
+
+  <div class="gift-box" id="giftBox">
+    <div class="lid"></div>
+    🎁
+  </div>
+
+  <div class="message-box" id="messageBox">
+    <h1>🌸 Happy Birthday Pagli! 🌸</h1>
+    <p>You light up every room you walk into 🌟</p>
+    <button class="btn" id="showMsg">Special Message 💌</button>
+<div class="hidden-message" id="hiddenMessage">
+  Dear Madamjii♥️♥️,<br><br>
+  Paheli baat toh apko apke janamdin ki lakh lakh badhaiyan ji...<br><br>
+  Mein apko iss special awasar par kuch baatein batana pasand krunga appke baarein mein... agar nahi sunna ho toh bhi sunlena moti...<br><br>
+  Haa moti se yaad aaya toh pehli baat toh moti nahi hainn — jaise bhi hain, cute hain! 😄 Batadena teri maa ko...<br><br>
+  Aur kya bolu🤔🤔... waise bolne ke liye bht kuch hain par mein bolunga nahi...<br><br>
+  Itna bolunga ki **you are so special and unique**... App jaisa iss duniya mein koi nahi hain... Tu maan ya mat...<br><br>
+  Aur maine jo lambe chawde letter ki baat bola tha wo tujhe abhi nahi milenge... Jab lagega mein tujhe de sakta hu, mein tujhe de dunga... 💌<br><br>
+</div>
+
+    <button class="btn" id="celebrate">Celebrate With Magic ✨</button>
+  </div>
+
+  <script>
+    const gift = document.getElementById("giftBox");
+    const lid = document.querySelector(".lid");
+    const msgBox = document.getElementById("messageBox");
+    const hiddenMsg = document.getElementById("hiddenMessage");
+
+    gift.addEventListener("click", () => {
+      gift.classList.add("open");
+      setTimeout(() => {
+        msgBox.style.display = "block";
+        msgBox.style.opacity = 1;
+      }, 600);
+    });
+
+    document.getElementById("showMsg").addEventListener("click", () => {
+      hiddenMsg.style.display = "block";
+    });
+
+    document.getElementById("celebrate").addEventListener("click", () => {
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+      for (let i = 0; i < 20; i++) {
+        const el = document.createElement("div");
+        el.className = "float";
+        el.textContent = Math.random() > 0.5 ? "💝" : "🎀";
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.fontSize = Math.random() * 24 + 24 + "px";
+        el.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        document.getElementById("floatContainer").appendChild(el);
+        setTimeout(() => el.remove(), 10000);
+      }
+    });
+  </script>
+</body>
+</html>
